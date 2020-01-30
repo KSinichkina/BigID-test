@@ -2,6 +2,13 @@
 
 BigID test project.
 
+
+## Before usage start Node Server
+
+```sh
+node node.js
+```
+
 ## Building and running on localhost
 
 First install dependencies:

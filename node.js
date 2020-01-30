@@ -11,8 +11,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-// app.use(express.static('../client'));
-app.use(bodyParser.json());
+const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 var mapResponse = {
     usersTotal: 1230,
@@ -44,24 +43,13 @@ var mapResponse = {
 };
 
 app.get('/users', function (req, res) {
-
-  //httpGet(options)
-  //  .then(
-  //  response => {
-  //    console.log(`Fulfilled: ${response}`);
-  //    res.send(response);
-  //},
-  //  error => {
-  //    console.log(`Rejected: ${error}`);
   res.send(mapResponse);
-  //  }
-  //);
-
 });
 
-// app.update('/update', function (req, res) {
-//     return res.send(mapResponse);
-// });
+app.post('/update', urlencodedParser, function (req, res) {
+  if(!req.body) return response.sendStatus(400);
+  res.send(mapResponse);
+});
 
 
 app.listen('3000', function(){
