@@ -3,6 +3,8 @@ import Chart from '../Chart';
 import { useRequest } from '../../hooks/useRequest';
 import { requestUsers } from '../../api/api';
 
+import styles from './Overview.scss';
+
 const Overview = () => {
     const { data, isLoading, error} = useRequest(requestUsers, []);
 
@@ -17,7 +19,7 @@ const Overview = () => {
     const isDataLoaded = !isLoading && data && data.data.data.length > 0;
 
     return isDataLoaded ? (
-        <div className='overview'>
+        <div className={styles.overview}>
             <h3>Total Users: { data?.data.usersTotal }</h3>
             <Chart
                 chartData={data?.data.data}

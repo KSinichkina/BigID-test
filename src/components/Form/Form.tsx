@@ -6,6 +6,8 @@ import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 //@ts-ignore
 import { updateCountry } from '../../api/api';
 
+import styles from './Form.scss';
+
 export type OptionValue = { 
     value: string;
     label: string
@@ -53,7 +55,7 @@ const Form = () => {
 
     // TODO: validation should bbe added
     
-    return <div className='form'>
+    return <div className={styles.form}>
         <Select
             options={state.options}
             value={state.value}

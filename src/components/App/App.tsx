@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Layout from '../Layout';
 import Sidebar from '../Sidebar';
-import './App.scss';
+import styles from './App.scss';
 
 const App = () => (
-    <div className='body'>
+    <div className={styles.body}>
       <Sidebar />
       <Layout />
     </div>

@@ -4,8 +4,10 @@ import { Helmet } from 'react-helmet';
 import Overview from '../Overview';
 import Form from '../Form';
 
+import styles from './Layout.scss';
+
 const Layout = () => (
-  <div className='layout'>
+  <div className={styles.layout}>
     <Helmet>
       <title>BigID-test</title>
       <meta charSet="utf-8" />
