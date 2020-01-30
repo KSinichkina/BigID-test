@@ -33,14 +33,14 @@ const Form = () => {
         setState({ options: state.options, value });
     }
     
-    return <>
+    return <div className='form'>
         <Select
             options={state.options}
             value={state.value}
             onChange={changeHandler}
         />
          <InputNumber min={10} max={1000000} step={1} value={num} onChange={setNum} />
-    </>;
+    </div>;
 }
 
 export default Form;

@@ -27,17 +27,18 @@ const config = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
+        test: /\.s[ac]ss$/i,
         use: [
           'style-loader',
+          'css-loader',
           {
-            loader: 'css-loader',
+            loader: 'sass-loader',
             options: {
-              importLoaders: 1,
-              modules: true
-            }
-          }
-        ]
+              // Prefer `dart-sass`
+              implementation: require('sass'),
+            },
+          },
+        ],
       },
       {
         test: /\.svg$/,

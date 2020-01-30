@@ -17,8 +17,8 @@ const Overview = () => {
     const isDataLoaded = !isLoading && data && data.data.data.length > 0;
 
     return isDataLoaded ? (
-        <div>
-            <h3>Total Users:{ data?.data.usersTotal }</h3>
+        <div className='overview'>
+            <h3>Total Users: { data?.data.usersTotal }</h3>
             <Chart
                 chartData={data?.data.data}
             />

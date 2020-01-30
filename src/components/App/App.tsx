@@ -1,12 +1,13 @@
 import * as React from 'react';
-import Main from '../Main';
+import Layout from '../Layout';
 import Sidebar from '../Sidebar';
+import './App.scss';
 
 const App = () => (
-    <>
+    <div className='body'>
       <Sidebar />
-      <Main />
-    </>
+      <Layout />
+    </div>
   )
 
 export default App;
