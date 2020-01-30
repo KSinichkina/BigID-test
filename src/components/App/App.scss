@@ -31,7 +31,8 @@ $font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida San
     grid-area: 1 / 1 / 2 / 3;
     background: $body-color;
     width: 200px;
- }
+}
+
 .layout { 
     grid-area: 1 / 2 / 2 / 3; 
 }
@@ -56,3 +57,13 @@ $font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida San
         cursor: pointer;
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .body {
+        grid-template-columns: 120px 1fr;
+
+        .sidebar { 
+            width: 120px;
+        }
+    }
+  }

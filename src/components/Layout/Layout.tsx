@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Overview from '../Overview';
 import Form from '../Form';
 
 const Layout = () => (
   <div className='layout'>
+    <Helmet>
+      <title>BigID-test</title>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    </Helmet>
     <Switch>
       <Route exact path='/' component={Overview}/>
-      <Route path='/form' component={Form}/>
+      <Route exact path='/form' component={Form}/>
     </Switch>
   </div>
 )
