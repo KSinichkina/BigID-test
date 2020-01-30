@@ -2,12 +2,11 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 
 import Select, { ValueType, OptionsType, GroupedOptionsType } from 'react-select';
-//@ts-ignore
-import countryList from 'react-select-country-list';
+import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 //@ts-ignore
 import InputNumber from 'react-input-number';
 
-type OptionValue = { 
+export type OptionValue = { 
     value: string;
     label: string
 };
@@ -24,7 +23,7 @@ const Form = () => {
     const [state, setState] = useState(initialState);
     const [num, setNum] = useState(0);
     useEffect(() => {
-        const options = countryList().getData();
+        const options = am4geodata_worldLow.features.map(({ properties }) => ({ value: properties.id, label: properties.name }));
         setState({options, value: options[0]});
 
         return () => {};
@@ -33,7 +32,7 @@ const Form = () => {
     const changeHandler = (value: ValueType<OptionValue>) => {
         setState({ options: state.options, value });
     }
-
+    
     return <>
         <Select
             options={state.options}

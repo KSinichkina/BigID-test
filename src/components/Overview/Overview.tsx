@@ -5,12 +5,26 @@ import { requestUsers } from '../../api/api';
 
 const Overview = () => {
     const { data, isLoading, error} = useRequest(requestUsers, []);
-    console.log(data, isLoading, error);
 
-    return isLoading ? <div>Loading...</div> :
-     <div>Total Users: ???
-        <Chart/>
-    </div>;
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!isLoading && error) {
+        return <div>Sorry! Some error was occured</div>;
+    }
+
+    const isDataLoaded = !isLoading && data && data.data.data.length > 0;
+
+    return isDataLoaded ? (
+        <div>
+            <h3>Total Users:{ data?.data.usersTotal }</h3>
+            <Chart
+                chartData={data?.data.data}
+            />
+        </div>
+    ) : <div>No Data</div>;
+     
 }
 
 export default Overview;

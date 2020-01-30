@@ -1,6 +1,6 @@
-# empty-project
+# test-project BigID
 
-Empty project.
+BigID test project.
 
 ## Building and running on localhost
 
@@ -30,8 +30,4 @@ npm run build-dev
 
 ## Running
 
-Open the file `dist/index.html` in your browser
-
-## Credits
-
-Made with [createapp.dev](https://createapp.dev/)
+Open the file `http://localhost:8080` in your browser
