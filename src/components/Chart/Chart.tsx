@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useEffect, useRef } from 'react';
+
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 // Importing geodata (map data)
@@ -17,54 +19,52 @@ interface Props {
     chartData: ChartData[];
 }
 
-class Chart extends React.Component<Props> {
-    state = {
-        chart: undefined,
-    };
+const addColorToCountry = (item: ChartData) => ({...item, fill: am4core.color("#95cdff")})
 
-    componentDidMount() {
-    var chart = am4core.create("chartdiv", am4maps.MapChart);
+const Chart = (props: Props) => {
+  const chartRef = useRef<am4core.Optional<string | HTMLElement> | undefined>(undefined);
+
+  useEffect(() => {
+    const chart = am4core.create(chartRef.current, am4maps.MapChart);
     chart.geodata = am4geodata_worldLow;
     chart.projection = new am4maps.projections.Miller();
     // Create map polygon series
-    var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
+    const polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
 
     // Make map load polygon (like country names) data from GeoJSON
     polygonSeries.useGeodata = true;
 
     // Configure series
-    var polygonTemplate = polygonSeries.mapPolygons.template;
+    const polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.tooltipText = "{name} {value}";
     polygonTemplate.fill = am4core.color("#ddd");
 
     // Create hover state and set alternative fill color
-    var hs = polygonTemplate.states.create("hover");
+    const hs = polygonTemplate.states.create("hover");
     hs.properties.fill = am4core.color("#00007F");
 
     // Remove Antarctica
     polygonSeries.exclude = ["AQ"];
 
      // Add some data
-     polygonSeries.data = this.props.chartData.map((item: ChartData) => ({...item, fill: am4core.color("#95cdff")}));
+     polygonSeries.data = props.chartData.map(addColorToCountry);
 
 
     // Bind "fill" property to "fill" key in data
     polygonTemplate.propertyFields.fill = "fill";
-        this.setState({chart})
-    //   this.chart = chart;
-    }
-  
-    componentWillUnmount() {
-      if (this.state.chart) {
-        this.state.chart.dispose();
+
+    return () => {
+      if (chart) {
+        chart.dispose();
       }
-    }
-  
-    render() {
-      return (
-        <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
-      );
-    }
+    };
+  }, []);
+
+
+    return (
+      //@ts-ignore
+      <div ref={chartRef} style={{ width: "100%", height: "500px" }}></div>
+    );
   }
 
 export default Chart;
